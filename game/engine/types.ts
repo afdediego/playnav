@@ -84,7 +84,7 @@ export type GameState =
 /** Main game state */
 export interface Game {
   state: GameState;
-  player: PlayerEntity | null;
+  player: any; // Player class instance
   enemies: EnemyEntity[];
   playerBullets: BulletEntity[];
   enemyBullets: BulletEntity[];
