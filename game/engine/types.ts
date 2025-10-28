@@ -85,9 +85,9 @@ export type GameState =
 export interface Game {
   state: GameState;
   player: any; // Player class instance
-  enemies: EnemyEntity[];
-  playerBullets: BulletEntity[];
-  enemyBullets: BulletEntity[];
+  enemies: any[]; // Enemy class instances
+  playerBullets: any[]; // Bullet class instances
+  enemyBullets: any[]; // Bullet class instances
   formation: any; // Formation class instance
   score: number;
   highScore: number;
