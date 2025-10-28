@@ -75,7 +75,7 @@ export class Formation {
         const x = startX + col * GAME_CONFIG.ENEMY_SPACING_X;
         const y = startY + row * GAME_CONFIG.ENEMY_SPACING_Y;
 
-        const enemy = new Enemy({ x, y }, type, row, col);
+        const enemy = new Enemy({ x, y }, type, row, col, level); // Pasar nivel
         this.enemies.push(enemy);
         enemyIndex++;
       }
@@ -86,16 +86,18 @@ export class Formation {
    * Get level configuration - Dificultad EXTREMA x15 TOTAL
    */
   private getLevelConfig(level: number): LevelConfig {
-    // AUMENTADO: Más disparos en todos los niveles (+50%)
+    // AMPLIADO: 7 niveles con progresión continua
     const shootMultipliers = [
       4.5,    // Nivel 1: 4.5x base - Más disparos desde el inicio
       7.5,    // Nivel 2: 7.5x base - Bastante intenso
       11.0,   // Nivel 3: 11x base - Muy desafiante
       15.0,   // Nivel 4: 15x base - Extremadamente difícil
-      22.0    // Nivel 5: 22x base - LLUVIA DE BALAS
+      22.0,   // Nivel 5: 22x base - LLUVIA DE BALAS
+      30.0,   // Nivel 6: 30x base - INFIERNO DE BALAS (naves naranjas)
+      40.0    // Nivel 7: 40x base - APOCALIPSIS FINAL (naves rojas)
     ];
     
-    const shootMultiplier = shootMultipliers[level - 1] || shootMultipliers[4];
+    const shootMultiplier = shootMultipliers[level - 1] || shootMultipliers[6];
     
     return {
       level,
@@ -111,16 +113,18 @@ export class Formation {
    * Calculate formation speed based on level - VELOCIDAD LATERAL AUMENTADA
    */
   private calculateSpeed(level: number): number {
-    // Velocidad lateral MUCHO más rápida para movimiento dinámico
+    // AMPLIADO: Velocidad hasta nivel 7
     const speedMultipliers = [
       3.5,   // Nivel 1: 3.5x - Movimiento rápido desde el inicio
       5.0,   // Nivel 2: 5x - Muy rápido lateralmente
       7.0,   // Nivel 3: 7x - Súper rápido
       9.5,   // Nivel 4: 9.5x - Extremadamente rápido
-      12.0   // Nivel 5: 12x - VELOCIDAD LATERAL MÁXIMA
+      12.0,  // Nivel 5: 12x - Muy muy rápido
+      15.0,  // Nivel 6: 15x - VELOCIDAD EXTREMA (naves naranjas)
+      18.0   // Nivel 7: 18x - VELOCIDAD MÁXIMA (naves rojas)
     ];
     
-    return GAME_CONFIG.BASE_ENEMY_SPEED * (speedMultipliers[level - 1] || speedMultipliers[4]);
+    return GAME_CONFIG.BASE_ENEMY_SPEED * (speedMultipliers[level - 1] || speedMultipliers[6]);
   }
 
   /**

@@ -169,7 +169,7 @@ export const GAME_CONFIG = {
   BASE_SHOOT_PROBABILITY: 0.15, // AUMENTADO: Más disparos para mayor desafío (0.08 → 0.15)
   INVULNERABLE_TIME: 2,
   TARGET_FPS: 60,
-  MAX_LEVEL: 5,
+  MAX_LEVEL: 7, // AMPLIADO: Ahora son 7 niveles en total
   AUTO_SHOOT_MOBILE: true,
 } as const;
 

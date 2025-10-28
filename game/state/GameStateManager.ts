@@ -290,8 +290,8 @@ export class GameStateManager {
    * Level complete
    */
   private levelComplete(): void {
-    // Si alcanzó el nivel 5, es victoria total
-    if (this.game.level >= 5) {
+    // Si alcanzó el nivel 7, es victoria total
+    if (this.game.level >= 7) {
       this.setState('gameOver');
       this.playSound('levelUp');
     } else {
@@ -304,7 +304,7 @@ export class GameStateManager {
    * Continue to next level
    */
   public nextLevel(): void {
-    if (this.game.level < 5) {
+    if (this.game.level < 7) {
       this.game.level++;
       this.notifyLevelChange();
       this.initializeLevel();

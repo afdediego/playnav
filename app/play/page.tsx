@@ -160,7 +160,7 @@ export default function PlayPage() {
               </h2>
               <div className="font-pixel text-2xl mb-6 text-white">
                 <div className="mb-2">PUNTOS: {score}</div>
-                {level < 5 && <div className="text-retro-yellow">SIGUIENTE: NIVEL {level + 1}</div>}
+                {level < 7 && <div className="text-retro-yellow">SIGUIENTE: NIVEL {level + 1}</div>}
               </div>
               <Button onClick={handleContinue} className="w-full pointer-events-auto">
                 → CONTINUAR
@@ -173,13 +173,13 @@ export default function PlayPage() {
         {gameState === 'gameOver' && (
           <div className="absolute inset-0 bg-black/80 flex items-center justify-center z-50 pointer-events-auto">
             <div className="bg-black/90 border-4 border-retro-pink p-8 rounded-lg max-w-md mx-4 text-center">
-              {level >= 5 ? (
+              {level >= 7 ? (
                 <>
                   <h2 className="font-pixel text-4xl mb-4 text-retro-green retro-text animate-pulse">
                     ¡VICTORIA!
                   </h2>
                   <p className="font-pixel text-lg mb-4 text-retro-yellow">
-                    ¡Completaste todos los niveles!
+                    ¡Completaste los 7 niveles!
                   </p>
                 </>
               ) : (

@@ -18,6 +18,7 @@ export class Enemy implements EnemyEntity {
   public col: number;
   public canShoot: boolean = true;
   public animFrame: number = 0;
+  public level: number; // Nivel actual del juego
 
   private animTimer: number = 0;
   private readonly animSpeed: number = 0.5; // seconds per frame
@@ -26,27 +27,30 @@ export class Enemy implements EnemyEntity {
     position: Vector2,
     type: EnemyType,
     row: number,
-    col: number
+    col: number,
+    level: number = 1 // Nuevo parámetro: nivel del juego
   ) {
     this.id = `enemy_${row}_${col}`;
     this.position = { ...position };
     this.type = type;
     this.row = row;
     this.col = col;
+    this.level = level;
     this.width = GAME_CONFIG.ENEMY_WIDTH;
     this.height = GAME_CONFIG.ENEMY_HEIGHT;
     this.velocity = { x: 0, y: 0 };
 
-    // Set points based on type
+    // Set points based on type (más puntos en niveles altos)
+    const levelMultiplier = 1 + (level - 1) * 0.3;
     switch (type) {
       case 'squid':
-        this.points = 30;
+        this.points = Math.floor(30 * levelMultiplier);
         break;
       case 'crab':
-        this.points = 20;
+        this.points = Math.floor(20 * levelMultiplier);
         break;
       case 'octopus':
-        this.points = 10;
+        this.points = Math.floor(10 * levelMultiplier);
         break;
     }
   }
@@ -78,18 +82,49 @@ export class Enemy implements EnemyEntity {
     const x = Math.floor(this.position.x);
     const y = Math.floor(this.position.y);
 
-    // Set color based on type
+    // Set color based on type AND level
     let color: string;
-    switch (this.type) {
-      case 'squid':
-        color = '#ffff00'; // Yellow
-        break;
-      case 'crab':
-        color = '#ff00ff'; // Magenta
-        break;
-      case 'octopus':
-        color = '#00ffff'; // Cyan
-        break;
+    
+    // NIVELES 6 Y 7: Colores especiales
+    if (this.level === 6) {
+      // Nivel 6: NAVES NARANJAS (todas)
+      switch (this.type) {
+        case 'squid':
+          color = '#ff8800'; // Naranja brillante
+          break;
+        case 'crab':
+          color = '#ff6600'; // Naranja más intenso
+          break;
+        case 'octopus':
+          color = '#ffaa00'; // Naranja amarillento
+          break;
+      }
+    } else if (this.level >= 7) {
+      // Nivel 7: NAVES ROJAS (todas) - APOCALIPSIS FINAL
+      switch (this.type) {
+        case 'squid':
+          color = '#ff0000'; // Rojo puro
+          break;
+        case 'crab':
+          color = '#cc0000'; // Rojo oscuro
+          break;
+        case 'octopus':
+          color = '#ff3333'; // Rojo claro
+          break;
+      }
+    } else {
+      // Niveles 1-5: Colores originales
+      switch (this.type) {
+        case 'squid':
+          color = '#ffff00'; // Yellow
+          break;
+        case 'crab':
+          color = '#ff00ff'; // Magenta
+          break;
+        case 'octopus':
+          color = '#00ffff'; // Cyan
+          break;
+      }
     }
 
     ctx.fillStyle = color;
