@@ -116,18 +116,18 @@ export class Formation {
   }
 
   /**
-   * Calculate formation speed based on level - VELOCIDAD LATERAL AUMENTADA
+   * Calculate formation speed based on level - VELOCIDAD LATERAL AJUSTADA
    */
   private calculateSpeed(level: number): number {
-    // AMPLIADO: Velocidad hasta nivel 7
+    // AJUSTADO: Velocidades más equilibradas en niveles finales
     const speedMultipliers = [
       3.5,   // Nivel 1: 3.5x - Movimiento rápido desde el inicio
       5.0,   // Nivel 2: 5x - Muy rápido lateralmente
       7.0,   // Nivel 3: 7x - Súper rápido
       9.5,   // Nivel 4: 9.5x - Extremadamente rápido
-      12.0,  // Nivel 5: 12x - Muy muy rápido
-      15.0,  // Nivel 6: 15x - VELOCIDAD EXTREMA (naves naranjas)
-      18.0   // Nivel 7: 18x - VELOCIDAD MÁXIMA (naves rojas)
+      10.5,  // Nivel 5: 10.5x - Muy rápido (AJUSTADO)
+      11.0,  // Nivel 6: 11x - Rápido controlado (naves naranjas)
+      12.0   // Nivel 7: 12x - Velocidad máxima equilibrada (naves rojas)
     ];
     
     return GAME_CONFIG.BASE_ENEMY_SPEED * (speedMultipliers[level - 1] || speedMultipliers[6]);
