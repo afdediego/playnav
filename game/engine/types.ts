@@ -88,7 +88,7 @@ export interface Game {
   enemies: EnemyEntity[];
   playerBullets: BulletEntity[];
   enemyBullets: BulletEntity[];
-  formation: FormationState | null;
+  formation: any; // Formation class instance
   score: number;
   highScore: number;
   level: number;
