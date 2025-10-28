@@ -66,9 +66,15 @@ export class Formation {
         } else {
           type = 'crab';
         }
-      } else {
+      } else if (level === 5) {
         // Nivel 5: formación mixta
         type = row % 2 === 0 ? 'squid' : 'crab';
+      } else if (level === 6) {
+        // Nivel 6: NAVES NARANJAS - predominan squids
+        type = row <= 3 ? 'squid' : 'crab';
+      } else {
+        // Nivel 7: NAVES ROJAS - todas squids (las más peligrosas)
+        type = 'squid';
       }
 
       for (let col = 0; col < config.enemyCols; col++) {
